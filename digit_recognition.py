@@ -51,7 +51,7 @@ optimizer = chooseOptimizer(model, "SGD", 0.1)
 
             
 def trainingSequence(model, trainingBatches, optimizer, lossFunction):
-    for ePoch in range(1000):
+    for ePoch in range(5):
         
         for images,labels in trainingBatches: #creates an iterator over the list of batches for selecting one bacth at a time     
             #before = model.firstLayerParam.weight.detach().clone()
@@ -62,7 +62,7 @@ def trainingSequence(model, trainingBatches, optimizer, lossFunction):
             optimizer.step()
             #after = model.firstLayerParam.weight.detach().clone()
             #print ((after - before).abs().max().item())  
-        return model
+    return model
          
 trainedModel = trainingSequence (model, trainingBatches, optimizer, lossFunction) 
 
