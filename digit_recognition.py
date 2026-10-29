@@ -51,7 +51,7 @@ optimizer = chooseOptimizer(model, "SGD", 0.1)
 
             
 def trainingSequence(model, trainingBatches, optimizer, lossFunction):
-    for ePoch in range(10):
+    for ePoch in range(1000):
         
         for images,labels in trainingBatches: #creates an iterator over the list of batches for selecting one bacth at a time     
             #before = model.firstLayerParam.weight.detach().clone()
@@ -62,18 +62,25 @@ def trainingSequence(model, trainingBatches, optimizer, lossFunction):
             optimizer.step()
             #after = model.firstLayerParam.weight.detach().clone()
             #print ((after - before).abs().max().item())  
-            return model
+        return model
          
+trainedModel = trainingSequence (model, trainingBatches, optimizer, lossFunction) 
+
+trainedModel.eval()
+
+correctPredictions = 0
+totalPredictions = 0
 
 for images,labels in testBatches:
         
-    trainedModel = trainingSequence (model, trainingBatches, optimizer, lossFunction)  
-    trainedModel.eval()
     with torch.no_grad():
         results = trainedModel(images) 
     Prediction = torch.argmax(results, dim = 1)
-    correctPredictions = (Prediction == labels).sum()
-    PercentAccurate = (correctPredictions / len(labels))
+    correctPredictions += (Prediction == labels).sum().item()
+    totalPredictions += len(labels)
+
+PercentAccurate = (correctPredictions / totalPredictions)
+
 print(PercentAccurate)
 print(f"{PercentAccurate:.1%}")
 
