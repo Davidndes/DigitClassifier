@@ -2,13 +2,12 @@
 
 The goal of this personal project is to design a CNN capable of recognizing handwritten digits. As one of my first projects I have approached writing this readme in a way that not only makes the experiment easily replicable but also documents the design choices, things I learned and questions I had as someone with a ChemE / Finance background relatively new to the ML space.
 
-# Quick facts
+# Summary facts
 1. Dataset: MNIST — 60,000 training images and 10,000 test images of handwritten digits, each 28×28 grayscale pixels with the correct label
 2. Model: Convolutional Neural Network (CNN), built in PyTorch
 3. Architecture: convolution → ReLU → max pooling (repeated), then flatten → fully connected layer → 10-way prediction
 4. Loss: cross-entropy
 5. Optimizers: SGD or Adam (selectable as comparing them was one of the goals)
-6. Current accuracy: ~90% on the test set (see "Results and Open Questions" below for why that's lower than it should be)
 
 # How I thought about the problem
 
